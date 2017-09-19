@@ -196,5 +196,5 @@ class Attendance(models.Model):
 
 class Project(models.Model):
     project_title = models.CharField(max_length=50, verbose_name="project")
-    project_fund = models.ForeignKey(Fund, on_delete=models.CASCADE)
+    project_fund = models.ForeignKey(Fund, on_delete=models.CASCADE, verbose_name="Fund committed")
 
