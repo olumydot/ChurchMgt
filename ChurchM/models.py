@@ -16,7 +16,7 @@ class Ministry(models.Model):
                         (CHILDREN, "Children"),
                         (OTHER, "Other"))
     ministry = models.CharField(max_length=2, unique=False, blank=False, choices=MINISTRY_CHOICES,
-                                default=ADULT,)
+                                default=ADULT)
     Remarks = models.CharField(max_length=256, blank=True)
 
     def __str__(self):
@@ -62,7 +62,7 @@ class EventType(models.Model):
 
 class Event(models.Model):
     service_type = models.ForeignKey(EventType, on_delete=models.CASCADE)
-    event_date = models.DateField()
+    event_date = models.DateTimeField(auto_now_add=True)
     event_time_start = models.TimeField()
     event_end_time = models.TimeField()
     Remarks = models.CharField(max_length=256, blank=True)
@@ -142,8 +142,8 @@ class People(models.Model):
         (FEMALE, "FEMALE"),
     )
     firstname = models.CharField(unique=False, blank=False, max_length=128)
-    lastname = models.CharField(unique=False, blank=False, max_length=128)
-    lastname = models.CharField (unique=False, blank=True, max_length=128)
+    middlename = models.CharField(unique=False, blank=False, max_length=128)
+    lastname = models.CharField(unique=False, blank=True, max_length=128)
     household = models.ForeignKey(Household, on_delete=models.CASCADE)
     sex = models.CharField(max_length=1, choices=SEX_CHOICES, unique=False)
     phone = models.CharField(max_length=10, unique=False, blank=True)
@@ -151,7 +151,7 @@ class People(models.Model):
     house_address = models.TextField(max_length=256, blank=True, editable=True)
     ministry = models.ForeignKey(Ministry, on_delete=models.CASCADE)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
-    profile_img = models.ImageField(width_field=60, height_field=60)
+    # profile_img = models.ImageField(width_field=60, height_field=60, null=True, blank=True)
     remarks = models.CharField(max_length=256, blank=True)
 
     def __str__(self):
